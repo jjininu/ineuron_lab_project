@@ -1,32 +1,35 @@
 columns:
-Store:           int64
-Date:            object
-Weekly_Sales:    float64
-Holiday_Flag:    int64
-Temperature:     float64
-Fuel_Price:      float64
-CPI:             float64
-Unemployment:    float64
+age :        int
+sex :        object
+bmi :        float
+children:    int
+smoker:      int
+region:      object
+charges:     float
+
+
 
 numerical_columns:
-  - Store
-  - Weekly_Sales
-  - Holiday_Flag
-  - Temperature
-  - Fuel_Price 
-  - CPI
-  - Unemployment
+  - age
+  - bmi
+  - children
+  - smoker
+  - charges 
+
 
 
 
 
 categorical_columns:
-  - Date
+  - sex
+  - region
 
 
 
 
-target_column: Weekly_Sales
+target_column : 
+  - charges
+
 
 
   

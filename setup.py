@@ -2,8 +2,8 @@ from setuptools import setup,find_packages
 from typing import List
 
 #Declaring variables for setup functions
-PROJECT_NAME="Store-sales-predictor"
-VERSION="0.0.6"
+PROJECT_NAME="insurance_charge-predictor"
+VERSION="0.0.1"
 AUTHOR="Junior Eshetu"
 DESRCIPTION="Machine Learning Project"
 

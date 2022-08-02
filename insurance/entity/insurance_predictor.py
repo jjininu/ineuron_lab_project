@@ -1,8 +1,8 @@
 import os
 import sys
 
-from weekly_sales.exception import CustomException
-from weekly_sales.util.util import load_object
+from insurance.exception import CustomException
+from insurance.util.util import load_object
 
 import pandas as pd
 
@@ -10,52 +10,45 @@ import pandas as pd
 class SalesData:
 
     def __init__(self,
-                 Store : int,
-                 Date : object,
-                 Weekly_Sales : float,
-                 Holiday_Flag : int,
-                 Temperature : float,
-                 Fuel_Price : float,
-                 CPI : float,
-                 Unemployment: float,
+                 age :        int,
+                 sex :        object,
+                 bmi :        float,
+                 children:    int,
+                 smoker:      int,
+                 region:      object,
+                 charges:     float
                  ):
         try:
             
-            self.Store = Store
-            self.Date = Date
-            self.Weekly_Sales = Weekly_Sales
-            self.Holiday_Flag = Holiday_Flag
-            self.Temperature = Temperature
-            self.Fuel_Price = Fuel_Price
-            self.CPI = CPI
-            self.Unemployment = Unemployment 
+            self.age = age
+            self.sex = sex
+            self.bmi = bmi
+            self.children = children
+            self.smoker = smoker
+            self.region = region
+            self.charges = charges
 
-
-
-
-            
         except Exception as e:
             raise CustomException(e, sys) from e
 
-    def get_sales_input_data_frame(self):
+    def insurance_input_data_frame(self):
         try:
             sales_input_dict = self.get_sales_data_as_dict()
             return pd.DataFrame(sales_input_dict)
         except Exception as e:
             raise CustomException(e, sys) from e
 
-    def get_sales_data_as_dict(self):
+    def insurance_data_as_dict(self):
         try:
             input_data = {
-               "Store" : [self.Store],
-                "Dates" : [self.Date] ,
-                "Weekly_Sales" : [self.Weekly_Sales],
-                "Holiday_Flag" : [self.Holiday_Flag],
-                "Temperature" : [self.Temperature],
-                "Fuel_Price" : [self.Fuel_Price],
-                "CPI" : [self.CPI],
-                "Unemployment" : [self.Unemployment]
-                }
+               "age" : [self.age],
+                "sex" : [self.sex] ,
+                "bmi" : [self.bmi],
+                "children" : [self.children],
+                "smoker" : [self.smoker],
+                "region" : [self.region],
+                "charges" : [self.charges]
+            }
             return input_data
         except Exception as e:
             raise CustomException(e, sys)
@@ -83,7 +76,7 @@ class salesPredictor:
         try:
             model_path = self.get_latest_model_path()
             model = load_object(file_path=model_path)
-            median_house_value = model.predict(X)
-            return median_house_value
+            insurance_charge = model.predict(X)
+            return insurance_charge
         except Exception as e:
             raise CustomException(e, sys) from e

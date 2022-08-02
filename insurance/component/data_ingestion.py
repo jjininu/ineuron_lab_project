@@ -1,16 +1,16 @@
 from threading import local
-from weekly_sales.entity.config_entity import DataIngestionConfig
+from insurance.entity.config_entity import DataIngestionConfig
 import sys,os
-from weekly_sales.exception import CustomException
-from weekly_sales.logger import logging
-from weekly_sales.entity.artifact_entity import DataIngestionArtifact
+from insurance.exception import CustomException
+from insurance.logger import logging
+from insurance.entity.artifact_entity import DataIngestionArtifact
 import tarfile
 import numpy as np
 import urllib.request
 
 import pandas as pd
 from sklearn.model_selection import StratifiedShuffleSplit
-from weekly_sales.util.util import read_write_file
+from insurance.util.util import read_write_file
 import shutil
 
 

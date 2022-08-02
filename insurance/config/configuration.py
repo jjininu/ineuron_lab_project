@@ -1,12 +1,12 @@
 
-from weekly_sales.constant import *
-from weekly_sales.entity.config_entity import DataIngestionConfig, DataTransformationConfig,DataValidationConfig,   \
+from insurance.constant import *
+from insurance.entity.config_entity import DataIngestionConfig, DataTransformationConfig,DataValidationConfig,   \
 ModelTrainerConfig,ModelEvaluationConfig,ModelPusherConfig,TrainingPipelineConfig
-from weekly_sales.util.util import read_yaml_file
-from weekly_sales.logger import logging
+from insurance.util.util import read_yaml_file
+from insurance.logger import logging
 import sys,os
-from weekly_sales.constant import *
-from weekly_sales.exception import CustomException
+from insurance.constant import *
+from insurance.exception import CustomException
 
 
 class Configuartion:
