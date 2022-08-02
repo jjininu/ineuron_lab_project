@@ -1,8 +1,8 @@
-from weekly_sales.pipeline.pipeline import Pipeline
-from weekly_sales.exception import CustomException
-from weekly_sales.logger import logging
-from weekly_sales.config.configuration import Configuartion
-from weekly_sales.component.data_transformation import DataTransformation
+from insurance.pipeline.pipeline import Pipeline
+from insurance.exception import CustomException
+from insurance.logger import logging
+from insurance.config.configuration import Configuartion
+from insurance.component.data_transformation import DataTransformation
 import os
 def main():
     try:

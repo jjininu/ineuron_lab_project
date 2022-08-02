@@ -1,5 +1,5 @@
 import yaml
-from weekly_sales.exception import CustomException
+from insurance.exception import CustomException
 import os,sys
 import numpy as np
 import dill

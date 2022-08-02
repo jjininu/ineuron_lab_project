@@ -1,27 +1,27 @@
 from collections import namedtuple
 from datetime import datetime
 import uuid
-from weekly_sales.config.configuration import Configuartion
-from weekly_sales.logger import logging
-from weekly_sales.exception import CustomException
+from insurance.config.configuration import Configuartion
+from insurance.logger import logging
+from insurance.exception import CustomException
 from threading import Thread
 from typing import List
 
 from multiprocessing import Process
-from weekly_sales.entity.artifact_entity import ModelPusherArtifact, DataIngestionArtifact, ModelEvaluationArtifact
-from weekly_sales.entity.artifact_entity import DataValidationArtifact, DataTransformationArtifact, ModelTrainerArtifact
-from weekly_sales.entity.config_entity import DataIngestionConfig, ModelEvaluationConfig
-from weekly_sales.component.data_ingestion import DataIngestion
-from weekly_sales.component.data_validation import DataValidation
-from weekly_sales.component.data_transformation import DataTransformation
-from weekly_sales.component.model_trainer import ModelTrainer
-from weekly_sales.component.model_evaluation import ModelEvaluation
-from weekly_sales.component.model_pusher import ModelPusher
+from insurance.entity.artifact_entity import ModelPusherArtifact, DataIngestionArtifact, ModelEvaluationArtifact
+from insurance.entity.artifact_entity import DataValidationArtifact, DataTransformationArtifact, ModelTrainerArtifact
+from insurance.entity.config_entity import DataIngestionConfig, ModelEvaluationConfig
+from insurance.component.data_ingestion import DataIngestion
+from insurance.component.data_validation import DataValidation
+from insurance.component.data_transformation import DataTransformation
+from insurance.component.model_trainer import ModelTrainer
+from insurance.component.model_evaluation import ModelEvaluation
+from insurance.component.model_pusher import ModelPusher
 import os, sys
 from collections import namedtuple
 from datetime import datetime
 import pandas as pd
-from weekly_sales.constant import EXPERIMENT_DIR_NAME, EXPERIMENT_FILE_NAME
+from insurance.constant import EXPERIMENT_DIR_NAME, EXPERIMENT_FILE_NAME
 
 Experiment = namedtuple("Experiment", ["experiment_id", "initialization_timestamp", "artifact_time_stamp",
                                        "running_status", "start_time", "stop_time", "execution_time", "message",
