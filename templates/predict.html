@@ -1,0 +1,137 @@
+{% extends 'header.html' %}
+
+{% block head %}
+
+
+<title>Housing Estimator</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
+
+
+        <form action="/predict" method="post">
+            <legend>weekly sales Estimation Form</legend>
+            <div class="mb-3">
+                <label class="form-label">Store</label>
+                <input class="form-control" type="text" name="Store" placeholder="Enter Store Number"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Year</label>
+                <input class="form-control" type="text" name="year" placeholder="Enter year"
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Month</label>
+                <input class="form-control" type="Month" name="Month"
+                    placeholder="Enter Month" />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Day of the week</label>
+                <input class="form-control" type="text" name="Day of the week" placeholder="Enter Day of the week"
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Holiday_Flag</label>
+                <input class="form-control" type="text" name="Holiday_Flag"
+                    placeholder="Enter Holiday_Flag" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Temperature</label>
+                <input class="form-control" type="text" name="Temperature" placeholder="Enter Temperature"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fuel_Price</label>
+                <input class="form-control" type="text" name="Fuel_Price" placeholder="Enter Fuel_Price"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">CPI</label>
+                <input class="form-control" type="text" name="CPI"
+                    placeholder="Enter CPI" required />
+            </div>
+            <!-- <div class="mb-3">
+                <label class="form-label">Ocean Proximity</label>
+                <select class="form-control" name="ocean_proximity" placeholder="Enter a value of ocean_proximity"
+                    required>
+
+                    <option value="<1H OCEAN">
+                        &lt;1H OCEAN
+                    </option>
+                    <option value="INLAND">
+                        INLAND
+                    </option>
+                    <option value="NEAR BAY">
+                        NEAR BAY
+                    </option>
+                    <option value="NEAR OCEAN">
+                        NEAR OCEAN
+                    </option>
+                    <option value="ISLAND">
+                        ISLAND
+                    </option>
+
+                </select>
+            </div> -->
+            <div class="mb-3">
+
+                <input class="btn btn-primary" type="submit" value="Predict weekly sales" required />
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+              Walmart weekly sales
+            </div>
+            <div class="card-body">
+        {% if context['sales_data'] is not none %}
+        <table class="table table-striped">
+            <caption>Weekly Sales Prediction </caption>
+            <tr>
+                <th>Input Feature</th>
+                <th>Feature Value</th>
+
+            </tr>
+            {% for column,value in context['sales_data'].items() %}
+
+
+
+            <tr>
+                <td>{{column}}</td>
+                <td>{{value[0]}}</td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+
+                <td>Weekly Sales </td>
+                <td>
+                    {{ context['Weekly Sales'] }}
+                </td>
+            </tr>
+        </table>
+
+        {% else %}
+       
+              <h5 class="card-title">Submit Form</h5>
+              <p class="card-text">Kindly provide necessary information to estimate Weekly Sales</p>
+            
+         
+
+        {% endif %}
+        Go to <a href="/" class="btn btn-primary">Home</a>
+    </div>
+</div>
+    </div>
+
+    {% endblock %}
