@@ -1,15 +1,15 @@
 
 
-from weekly_sales.logger import logging
-from weekly_sales.exception import CustomException
-from weekly_sales.entity.config_entity import ModelEvaluationConfig
-from weekly_sales.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact,ModelTrainerArtifact,ModelEvaluationArtifact
-from weekly_sales.constant import *
+from insurance.logger import logging
+from insurance.exception import CustomException
+from insurance.entity.config_entity import ModelEvaluationConfig
+from insurance.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact,ModelTrainerArtifact,ModelEvaluationArtifact
+from insurance.constant import *
 import numpy as np
 import os
 import sys
-from weekly_sales.util.util import write_yaml_file, read_yaml_file, load_object,load_data
-from weekly_sales.entity.model_factory import evaluate_regression_model
+from insurance.util.util import write_yaml_file, read_yaml_file, load_object,load_data
+from insurance.entity.model_factory import evaluate_regression_model
 
 
 

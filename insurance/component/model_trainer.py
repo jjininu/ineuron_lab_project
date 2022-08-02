@@ -1,13 +1,13 @@
 
-from weekly_sales.exception import CustomException
+from insurance.exception import CustomException
 import sys
-from weekly_sales.logger import logging
+from insurance.logger import logging
 from typing import List
-from weekly_sales.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
-from weekly_sales.entity.config_entity import ModelTrainerConfig
-from weekly_sales.util.util import load_numpy_array_data,save_object,load_object
-from weekly_sales.entity.model_factory import MetricInfoArtifact, ModelFactory,GridSearchedBestModel
-from weekly_sales.entity.model_factory import evaluate_regression_model
+from insurance.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
+from insurance.entity.config_entity import ModelTrainerConfig
+from insurance.util.util import load_numpy_array_data,save_object,load_object
+from insurance.entity.model_factory import MetricInfoArtifact, ModelFactory,GridSearchedBestModel
+from insurance.entity.model_factory import evaluate_regression_model
 
 
 

@@ -1,9 +1,9 @@
 from cgi import test
 from sklearn import preprocessing
-from weekly_sales.exception import CustomException
-from weekly_sales.logger import logging
-from weekly_sales.entity.config_entity import DataTransformationConfig 
-from weekly_sales.entity.artifact_entity import DataIngestionArtifact,\
+from insurance.exception import CustomException
+from insurance.logger import logging
+from insurance.entity.config_entity import DataTransformationConfig 
+from insurance.entity.artifact_entity import DataIngestionArtifact,\
 DataValidationArtifact,DataTransformationArtifact
 import sys,os
 import numpy as np
@@ -13,21 +13,21 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 import pandas as pd
-from weekly_sales.constant import *
-from weekly_sales.util.util import read_yaml_file,save_object,save_numpy_array_data,load_data
+from insurance.constant import *
+from insurance.util.util import read_yaml_file,save_object,save_numpy_array_data,load_data
 
-class FeatureGenerator(BaseEstimator, TransformerMixin):
-  def __init__(self,Date_ix=1):
-    self.Date_ix = Date_ix
-  def fit(self):
-    pass
-  def transform(self,X):
-    date =pd.to_datetime( X[:, self.Date_ix])
-    year = date.year()
-    month = date.month()
-    day_week = date.day_of_week
-    generated_feature = np.c_[X,date,year,day_week]
-    return generated_feature
+# class FeatureGenerator(BaseEstimator, TransformerMixin):
+#   def __init__(self,Date_ix=1):
+#     self.Date_ix = Date_ix
+#   def fit(self):
+#     pass
+#   def transform(self,X):
+#     date =pd.to_datetime( X[:, self.Date_ix])
+#     year = date.year()
+#     month = date.month()
+#     day_week = date.day_of_week
+#     generated_feature = np.c_[X,date,year,day_week]
+#     return generated_feature
 
 
 
@@ -61,12 +61,11 @@ class DataTransformation:
 
             num_pipeline = Pipeline(steps=[
                 ('imputer', SimpleImputer(strategy="median"))
-                ('scaler', StandardScaler())]
-            )
+                ('scaler', StandardScaler())])
 
             cat_pipeline = Pipeline(steps=[
                  ('impute', SimpleImputer(strategy="most_frequent")),
-                 ('to_date',FeatureGenerator()),
+                 ('onehot', OneHotEncoder(handle_unknown="ignore")),
                  ('scaler', StandardScaler(with_mean=False))])
 
 

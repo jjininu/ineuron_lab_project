@@ -1,7 +1,7 @@
-from weekly_sales.logger import logging
-from weekly_sales.exception import CustomException
-from weekly_sales.entity.artifact_entity import ModelPusherArtifact, ModelEvaluationArtifact 
-from weekly_sales.entity.config_entity import ModelPusherConfig
+from insurance.logger import logging
+from insurance.exception import CustomException
+from insurance.entity.artifact_entity import ModelPusherArtifact, ModelEvaluationArtifact 
+from insurance.entity.config_entity import ModelPusherConfig
 import os, sys
 import shutil
 
