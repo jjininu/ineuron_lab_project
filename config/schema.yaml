@@ -13,7 +13,7 @@ numerical_columns:
   - age
   - bmi
   - children
-  - charges 
+  
 
 
 
