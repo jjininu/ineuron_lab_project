@@ -199,6 +199,7 @@ class Pipeline(Thread):
         except Exception as e:
             raise CustomException(e, sys) from e
 
+
     @classmethod
     def get_experiments_status(cls, limit: int = 5) -> pd.DataFrame:
         try:

@@ -46,17 +46,18 @@ class DataIngestion:
 
             file_name = os.listdir(raw_data_dir)[0]
 
-            sales_file_path = os.path.join(raw_data_dir,file_name)
+            insurance_file_path = os.path.join(raw_data_dir,file_name)
 
 
-            logging.info(f"Reading csv file: [{sales_file_path}]")
-            sales_data_frame = pd.read_csv(sales_file_path)
+            logging.info(f"Reading csv file: [{insurance_file_path}]")
+            insurane_data_frame = pd.read_csv(insurance_file_path)
 
-            sales_data_frame["income_cat"] = pd.cut(
-                sales_data_frame["Weekly_Sales"],
+            insurance_file_path["income_cat"] = pd.cut(
+                insurane_data_frame["charges"],
                 bins=[0.0, 1.5, 3.0, 4.5, 6.0, np.inf],
                 labels=[1,2,3,4,5]
             )
+            
             
 
             logging.info(f"Splitting data into train and test")
@@ -65,9 +66,9 @@ class DataIngestion:
 
             split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 
-            for train_index,test_index in split.split(sales_data_frame, sales_data_frame["income_cat"]):
-                strat_train_set = sales_data_frame.loc[train_index].drop(["income_cat","Store","Date"],axis=1)
-                strat_test_set = sales_data_frame.loc[test_index].drop(["income_cat","Store","Date"],axis=1)
+            for train_index,test_index in split.split(insurane_data_frame, insurane_data_frame["income_cat"]):
+                strat_train_set = insurane_data_frame.loc[train_index].drop(["income_cat","Store","Date"],axis=1)
+                strat_test_set = insurane_data_frame.loc[test_index].drop(["income_cat","Store","Date"],axis=1)
 
             train_file_path = os.path.join(self.data_ingestion_config.ingested_train_dir,
                                             file_name)
