@@ -5,6 +5,7 @@ from insurance.logger import logging
 from insurance.entity.config_entity import DataTransformationConfig 
 from insurance.entity.artifact_entity import DataIngestionArtifact,\
 DataValidationArtifact,DataTransformationArtifact
+from sklearn.preprocessing import OneHotEncoder
 import sys,os
 import numpy as np
 from sklearn.base import BaseEstimator,TransformerMixin
@@ -67,7 +68,7 @@ class DataTransformation:
 
             cat_pipeline = Pipeline(steps=[
                  ('impute', SimpleImputer(strategy="most_frequent")),
-                 ('onehot', OneHotEncoder(handle_unknown="ignore")),
+                 ('onehot', OneHotEncoder(handle_unknown="ignore",)),
                  ('scaler', StandardScaler(with_mean=False))])
 
 
