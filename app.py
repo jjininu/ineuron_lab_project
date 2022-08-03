@@ -11,7 +11,7 @@ import json
 from insurance.config.configuration import Configuartion
 from insurance.constant import CONFIG_DIR, get_current_time_stamp
 from insurance.pipeline.pipeline import Pipeline
-from insurance.entity.insurance_predictor import InsuranceData, InsurancePredictor,get_insurance_data_as_dict,get_insurance_input_data_frame
+from insurance.entity.insurance_predictor import InsuranceData, InsurancePredictor
 from flask import send_file, abort, render_template
 
 
