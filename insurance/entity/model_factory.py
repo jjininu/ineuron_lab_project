@@ -6,13 +6,17 @@ import yaml
 from insurance.exception import CustomException
 import os
 import sys
+from insurance.constant import *
 
 from collections import namedtuple
 from typing import List
 from insurance.logger import logging
+
 from sklearn.metrics import r2_score,mean_squared_error
 GRID_SEARCH_KEY = 'grid_search'
 MODULE_KEY = 'module'
+
+
 CLASS_KEY = 'class'
 PARAM_KEY = 'params'
 MODEL_SELECTION_KEY = 'model_selection'
@@ -263,6 +267,7 @@ class ModelFactory:
                 model_obj_ref = ModelFactory.class_for_name(module_name=model_initialization_config[MODULE_KEY],
                                                             class_name=model_initialization_config[CLASS_KEY]
                                                             )
+                                                            
                 model = model_obj_ref()
                 
                 if PARAM_KEY in model_initialization_config:
