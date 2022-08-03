@@ -63,7 +63,7 @@ DATA_TRANSFORMATION_PREPROCESSED_FILE_NAME_KEY = "preprocessed_object_file_name"
 
 
 
-
+DATASET_SCHEMA_COLUMNS_KEY=  "columns"
 NUMERICAL_COLUMN_KEY="numerical_columns"
 CATEGORICAL_COLUMN_KEY = "categorical_columns"
 

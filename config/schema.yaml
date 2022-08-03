@@ -1,11 +1,11 @@
 columns:
-age :        int
-sex :        object
-bmi :        float
-children:    int
-smoker:      int
-region:      object
-charges:     float
+  age :        int
+  sex :        object
+  bmi :        float
+  children:    int
+  smoker:      int
+  region:      object
+  charges:     float
 
 
 
