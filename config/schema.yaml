@@ -13,7 +13,6 @@ numerical_columns:
   - age
   - bmi
   - children
-  - smoker
   - charges 
 
 
@@ -23,6 +22,7 @@ numerical_columns:
 categorical_columns:
   - sex
   - region
+  - smoker
 
 
 
