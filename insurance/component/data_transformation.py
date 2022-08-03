@@ -60,8 +60,10 @@ class DataTransformation:
 
 
             num_pipeline = Pipeline(steps=[
-                ('imputer', SimpleImputer(strategy="median"))
-                ('scaler', StandardScaler())])
+                ('imputer', SimpleImputer(strategy="median")),
+                ('scaler', StandardScaler())
+                ]
+                )
 
             cat_pipeline = Pipeline(steps=[
                  ('impute', SimpleImputer(strategy="most_frequent")),

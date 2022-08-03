@@ -34,32 +34,32 @@ class DataValidation:
             raise CustomException(e,sys) from e
 
 
-    def is_train_test_file_exists(self)->bool:
-        try:
-            logging.info("Checking if training and test file is available")
-            is_train_file_exist = False
-            is_test_file_exist = False
+    # def is_train_test_file_exists(self)->bool:
+    #     try:
+    #         logging.info("Checking if training and test file is available")
+    #         is_train_file_exist = False
+    #         is_test_file_exist = False
 
-            train_file_path = self.data_ingestion_artifact.train_file_path
-            test_file_path = self.data_ingestion_artifact.test_file_path
+    #         train_file_path = self.data_ingestion_artifact.train_file_path
+    #         test_file_path = self.data_ingestion_artifact.test_file_path
 
-            is_train_file_exist = os.path.exists(train_file_path)
-            is_test_file_exist = os.path.exists(test_file_path)
+    #         is_train_file_exist = os.path.exists(train_file_path)
+    #         is_test_file_exist = os.path.exists(test_file_path)
 
-            is_available =  is_train_file_exist and is_test_file_exist
+    #         is_available =  is_train_file_exist and is_test_file_exist
 
-            logging.info(f"Is train and test file exists?-> {is_available}")
+    #         logging.info(f"Is train and test file exists?-> {is_available}")
             
-            if not is_available:
-                training_file = self.data_ingestion_artifact.train_file_path
-                testing_file = self.data_ingestion_artifact.test_file_path
-                message=f"Training file: {training_file} or Testing file: {testing_file}" \
-                    "is not present"
-                raise Exception(message)
+    #         if not is_available:
+    #             training_file = self.data_ingestion_artifact.train_file_path
+    #             testing_file = self.data_ingestion_artifact.test_file_path
+    #             message=f"Training file: {training_file} or Testing file: {testing_file}" \
+    #                 "is not present"
+    #             raise Exception(message)
 
-            return is_available
-        except Exception as e:
-            raise CustomException(e,sys) from e
+    #         return is_available
+    #     except Exception as e:
+    #         raise CustomException(e,sys) from e
 
     
     def validate_dataset_schema(self)->bool:
@@ -126,7 +126,7 @@ class DataValidation:
 
     def initiate_data_validation(self)->DataValidationArtifact :
         try:
-            self.is_train_test_file_exists()
+            
             self.validate_dataset_schema()
             self.is_data_drift_found()
 
