@@ -2,16 +2,16 @@ from flask import Flask, request
 import sys
 
 
-from weekly_sales.util.util import read_yaml_file, write_yaml_file
+from insurance.util.util import read_yaml_file, write_yaml_file
 from matplotlib.style import context
-from weekly_sales.logger import logging
-from weekly_sales.exception import CustomException
+from insurance.logger import logging
+from insurance.exception import CustomException
 import os, sys
 import json
-from weekly_sales.config.configuration import Configuartion
-from weekly_sales.constant import CONFIG_DIR, get_current_time_stamp
-from weekly_sales.pipeline.pipeline import Pipeline
-from weekly_sales.entity.sales_predictor import salesPredictor, SalesData
+from insurance.config.configuration import Configuartion
+from insurance.constant import CONFIG_DIR, get_current_time_stamp
+from insurance.pipeline.pipeline import Pipeline
+from insurance.entity.insurance_predictor import InsuranceData, InsurancePredictor,get_insurance_data_as_dict,get_insurance_input_data_frame
 from flask import send_file, abort, render_template
 
 
@@ -25,10 +25,10 @@ PIPELINE_DIR = os.path.join(ROOT_DIR, PIPELINE_FOLDER_NAME)
 MODEL_DIR = os.path.join(ROOT_DIR, SAVED_MODELS_DIR_NAME)
 
 
-from weekly_sales.logger import get_log_dataframe
+from insurance.logger import get_log_dataframe
 
-SALES_DATA_KEY = "sales_data"
-WEEKLY_SALES_VALUE_KEY = "WEEKLY_SALES_value"
+INSURANCE_DATA_KEY = "insurance_data"
+INSURANCE_VALUE_KEY = "insurance_value"
 
 app = Flask(__name__)
 
@@ -103,43 +103,35 @@ def train():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     context = {
-        SALES_DATA_KEY: None,
-        WEEKLY_SALES_VALUE_KEY: None
+        INSURANCE_DATA_KEY: None,
+        INSURANCE_VALUE_KEY: None
     }
 
     if request.method == 'POST':
-        month = float(request.form['month'])
-        year = float(request.form['year'])
-        day_week = float(request.form['day_week'])
-        Holiday_Flag = float(request.form['Holiday_Flag'])
-        Temperature = float(request.form['Temperature'])
-        Fuel_Price = float(request.form['Fuel_Pricee'])
-        CPI = float(request.form['CPI'])
-        Unemployment = float(request.form['Unemployment'])
+        age = float(request.form['age'])
+        bmi = float(request.form['bmi'])
+        children = float(request.form['children'])
+        smoker = float(request.form['smoker'])
+        region = float(request.form['region'])
 
 
-
-
-
-        sales_data = SalesData( month = month,
-                                year = year,
-                                day_week = day_week,
-                                Holiday_Flag = Holiday_Flag,
-                                Temperature = Temperature,
-                                Fuel_Price = Fuel_Price,
-                                CPI = CPI,
-                                Unemployment = Unemployment)
+        insurance_data = InsuranceData( age = age,
+                                bmi = bmi,
+                                children = children,
+                                smoker = smoker,
+                                region = region
+                                )
             
             
             
                              
-        sales_df = sales_data.get_sales_input_data_frame()
-        sales_predictor = salesPredictor(model_dir=MODEL_DIR)
-        weekly_sales = sales_predictor.predict(X=sales_df)
+        insurance_df = insurance_data.get_insurance_input_data_frame()
+        insurance_predictor = InsurancePredictor(model_dir=MODEL_DIR)
+        insurance_charge = insurance_predictor.predict(X=insurance_df)
         context = {
-            SALES_DATA_KEY: sales_data.get_sales_data_as_dict(),
-            WEEKLY_SALES_VALUE_KEY: weekly_sales,
-        }
+           INSURANCE_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
+           INSURANCE_VALUE_KEY: insurance_charge,
+           "message": "Prediction done."}
         return render_template('predict.html', context=context)
     return render_template("predict.html", context=context)
 

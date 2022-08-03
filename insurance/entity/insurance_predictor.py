@@ -7,7 +7,7 @@ from insurance.util.util import load_object
 import pandas as pd
 
 
-class SalesData:
+class InsuranceData:
 
     def __init__(self,
                  age :        int,
@@ -31,14 +31,14 @@ class SalesData:
         except Exception as e:
             raise CustomException(e, sys) from e
 
-    def insurance_input_data_frame(self):
+    def get_insurance_input_data_frame(self):
         try:
-            sales_input_dict = self.get_sales_data_as_dict()
-            return pd.DataFrame(sales_input_dict)
+            insurance_input_dict = self.get_insurance_data_as_dict()
+            return pd.DataFrame(insurance_input_dict)
         except Exception as e:
             raise CustomException(e, sys) from e
 
-    def insurance_data_as_dict(self):
+    def get_insurance_data_as_dict(self):
         try:
             input_data = {
                "age" : [self.age],
@@ -54,7 +54,7 @@ class SalesData:
             raise CustomException(e, sys)
 
 
-class salesPredictor:
+class InsurancePredictor:
 
     def __init__(self, model_dir: str):
         try:
