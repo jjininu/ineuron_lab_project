@@ -35,8 +35,8 @@ class DataIngestion:
                 os.remove(raw_data_dir)
             os.makedirs(raw_data_dir,exist_ok=True)
             local_file = self.data_ingestion_config.local_file
-            local_file_dummies =pd.get_dummies(local_file,drop_first=True)
-            shutil.copy(local_file_dummies, raw_data_dir)
+            
+            shutil.copy(local_file, raw_data_dir)
             return local_file
         except Exception as e:
             raise Exception(e)
@@ -52,10 +52,11 @@ class DataIngestion:
 
 
             logging.info(f"Reading csv file: [{insurance_file_path}]")
-            insurane_data_frame = pd.read_csv(insurance_file_path)
+            insurance_data_frame = pd.read_csv(insurance_file_path)
+            insurance_data_frame  =pd.get_dummies(insurance_data_frame,drop_first=True)
 
-            insurane_data_frame["income_cat"] = pd.cut(
-                insurane_data_frame["charges"],
+            insurance_data_frame["income_cat"] = pd.cut(
+                insurance_data_frame["charges"],
                 bins=[0.0, 1.5, 3.0, 4.5, 6.0, np.inf],
                 labels=[1,2,3,4,5])
             
@@ -67,9 +68,9 @@ class DataIngestion:
 
             split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 
-            for train_index,test_index in split.split(insurane_data_frame, insurane_data_frame["income_cat"]):
-                strat_train_set = insurane_data_frame.loc[train_index].drop(["income_cat"],axis=1)
-                strat_test_set = insurane_data_frame.loc[test_index].drop(["income_cat"],axis=1)
+            for train_index,test_index in split.split(insurance_data_frame, insurance_data_frame["income_cat"]):
+                strat_train_set = insurance_data_frame.loc[train_index].drop(["income_cat"],axis=1)
+                strat_test_set = insurance_data_frame.loc[test_index].drop(["income_cat"],axis=1)
 
             train_file_path = os.path.join(self.data_ingestion_config.ingested_train_dir,
                                             "train"+".csv")
