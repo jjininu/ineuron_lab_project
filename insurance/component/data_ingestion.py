@@ -35,10 +35,12 @@ class DataIngestion:
                 os.remove(raw_data_dir)
             os.makedirs(raw_data_dir,exist_ok=True)
             local_file = self.data_ingestion_config.local_file
-            shutil.copy(local_file, raw_data_dir)
+            local_file_dummies =pd.get_dummies(local_file,drop_first=True)
+            shutil.copy(local_file_dummies, raw_data_dir)
             return local_file
         except Exception as e:
             raise Exception(e)
+    
     
     def split_data_as_train_test(self) -> DataIngestionArtifact:
         try:

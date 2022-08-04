@@ -17,18 +17,6 @@ import pandas as pd
 from insurance.constant import *
 from insurance.util.util import read_yaml_file,save_object,save_numpy_array_data,load_data
 
-# class FeatureGenerator(BaseEstimator, TransformerMixin):
-#   def __init__(self,Date_ix=1):
-#     self.Date_ix = Date_ix
-#   def fit(self):
-#     pass
-#   def transform(self,X):
-#     date =pd.to_datetime( X[:, self.Date_ix])
-#     year = date.year()
-#     month = date.month()
-#     day_week = date.day_of_week
-#     generated_feature = np.c_[X,date,year,day_week]
-#     return generated_feature
 
 
 
@@ -68,7 +56,6 @@ class DataTransformation:
 
             cat_pipeline = Pipeline(steps=[
                  ('impute', SimpleImputer(strategy="most_frequent")),
-                 ('one_hot_encoder', OneHotEncoder()),
                  ('scaler', StandardScaler(with_mean=False))])
 
 
