@@ -1,10 +1,13 @@
 columns:
   age :        int
-  sex :        object
+  sex_male :   int
   bmi :        float
   children:    int
-  smoker:      object
-  region:      object
+  smoker_yes:  int
+  region_northwest:  int
+  region_southeast : int
+  region_southwest : int
+
   charges:     float
 
 
@@ -13,16 +16,22 @@ numerical_columns:
   - age
   - bmi
   - children
+  - sex_male
+  - smoker_yes
+  - region_northwest
+  - region_southeast
+  - region_southwest
+
   
 
 
 
 
 
-categorical_columns:
-  - sex
-  - region
-  - smoker
+# categorical_columns:
+#   - sex
+#   - region
+#   - smoker
 
 
 
