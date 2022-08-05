@@ -45,7 +45,7 @@ class DataTransformation:
             dataset_schema = read_yaml_file(file_path=schema_file_path)
 
             numerical_columns = dataset_schema[NUMERICAL_COLUMN_KEY]
-            categorical_columns = dataset_schema[CATEGORICAL_COLUMN_KEY]
+            # categorical_columns = dataset_schema[CATEGORICAL_COLUMN_KEY]
 
 
             num_pipeline = Pipeline(steps=[
@@ -62,13 +62,14 @@ class DataTransformation:
 
             
 
-            logging.info(f"Categorical columns: {categorical_columns}")
+            # logging.info(f"Categorical columns: {categorical_columns}")
             logging.info(f"Numerical columns: {numerical_columns}")
 
 
             preprocessing = ColumnTransformer([
                 ('num_pipeline', num_pipeline, numerical_columns),
-                ('cat_pipeline', cat_pipeline, categorical_columns),
+                
+                # ('cat_pipeline', cat_pipeline, categorical_columns),
             ])
             return preprocessing
 
