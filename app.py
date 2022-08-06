@@ -133,15 +133,15 @@ def predict():
         region_southwest = ""
 
 
-        if region  == "southwest":
+        if region  == "Southwest":
             region_northwest == int(0)
             region_southeast == int(0)
             region_southwest == int(1)
-        elif region == "southeast":
+        elif region == "Southeast":
             region_northwest == int(0)
             region_southeast == int(1)
             region_southwest == int(0)
-        elif region == "northwest":
+        elif region == "Sorthwest":
             region_northwest == int(1)
             region_southeast == int(0)
             region_southwest == int(0)
@@ -172,8 +172,8 @@ def predict():
            INSURANCE_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
            INSURANCE_VALUE_KEY: insurance_charge,
            "message": "Prediction done."}
-        return render_template('predict.html', context=context)
-    return render_template("predict.html", context=context)
+    return render_template('predict.html', context=context)
+    
 
 
 @app.route('/saved_models', defaults={'req_path': 'saved_models'})
@@ -252,4 +252,4 @@ def render_log_dir(req_path):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
