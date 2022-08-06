@@ -110,38 +110,58 @@ def predict():
     if request.method == 'POST':
         age = float(request.form['age'])
         sex = float(request.form['sex'])
-        sex2 = ""
+        sex_male = ""
         if sex == "Male":
-            sex2 == 1
+            sex_male == 1
         else:
-            sex2 == 0
+            sex_male == 0
 
         bmi = float(request.form['bmi'])
+
         children = float(request.form['children'])
+
         smoker = float(request.form['smoker'])
-        smoker2 = ""
+        smoker_yes = ""
         if sex == "Yes":
-            smoker2 == 1
+            smoker_yes == 1
         else:
-            smoker2 == 0
+            smoker_yes == 0
 
         region = float(request.form['region'])
-        region2 = ""
+        region_northwest = ""
+        region_southeast = ""
+        region_southwest = ""
+
+
         if region  == "southwest":
-            region2 == 1
+            region_northwest == 0
+            region_southeast == 0
+            region_southwest == 1
+        elif region == "southeast":
+            region_northwest == 0
+            region_southeast == 1
+            region_southwest == 0
+        elif region == "northwest":
+            region_northwest == 1
+            region_southeast == 0
+            region_southwest == 0
         else:
-            smoker2 == 0
+            region_northwest == 0
+            region_southeast == 0
+            region_southwest == 0
 
 
 
 
 
         insurance_data = InsuranceData( age = age,
-                                sex = sex2,
+                                sex_male = smoker ,
                                 bmi = bmi,
                                 children = children,
-                                smoker = smoker2,
-                                region = region
+                                smoker_yes = smoker,
+                                region_northwest = region_northwest,
+                                region_southeast =  region_southeast,
+                                region_southwest = region_southwest
                                 )
             
             
