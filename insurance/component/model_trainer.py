@@ -11,7 +11,7 @@ from insurance.entity.model_factory import evaluate_regression_model
 
 
 
-class SalesEstimatorModel:
+class InsuranceEstimatorModel:
     def __init__(self, preprocessing_object, trained_model_object):
         """
         TrainedModel constructor
@@ -92,9 +92,9 @@ class ModelTrainer:
 
 
             trained_model_file_path=self.model_trainer_config.trained_model_file_path
-            sales_model = SalesEstimatorModel(preprocessing_object=preprocessing_obj,trained_model_object=model_object)
+            insurance_model = InsuranceEstimatorModel(preprocessing_object=preprocessing_obj,trained_model_object=model_object)
             logging.info(f"Saving model at path: {trained_model_file_path}")
-            save_object(file_path=trained_model_file_path,obj=sales_model)
+            save_object(file_path=trained_model_file_path,obj=insurance_model)
 
 
             model_trainer_artifact=  ModelTrainerArtifact(is_trained=True,message="Model Trained successfully",

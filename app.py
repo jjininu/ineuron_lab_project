@@ -33,10 +33,10 @@ INSURANCE_VALUE_KEY = "insurance_value"
 app = Flask(__name__)
 
 
-@app.route('/artifact', defaults={'req_path': 'sales'})
+@app.route('/artifact', defaults={'req_path': 'insurance'})
 @app.route('/artifact/<path:req_path>')
 def render_artifact_dir(req_path):
-    os.makedirs("sales", exist_ok=True)
+    os.makedirs("insurance", exist_ok=True)
     # Joining the base and the requested path
     print(f"req_path: {req_path}")
     abs_path = os.path.join(req_path)
@@ -108,7 +108,7 @@ def predict():
     }
 
     if request.method == 'POST':
-        age = float(request.form['age'])
+        age = int(request.form['age'])
         sex = str(request.form['sex'])
         sex_male = ""
         if sex == "Male":
@@ -118,14 +118,14 @@ def predict():
 
         bmi = float(request.form['bmi'])
 
-        children = float(request.form['children'])
+        children = int(request.form['children'])
 
         smoker = str(request.form['smoker'])
         smoker_yes = ""
         if sex == "Yes":
             smoker_yes == int(1)
         else:
-            smoker_yes == 0
+            smoker_yes == int(0)
 
         region = str(request.form['region'])
         region_northwest = ""
@@ -149,9 +149,7 @@ def predict():
             region_northwest == int(0)
             region_southeast == int(0)
             region_southwest == int(0)
-
-
-
+            
 
 
         insurance_data = InsuranceData( age = age,
