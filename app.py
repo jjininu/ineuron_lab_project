@@ -109,46 +109,46 @@ def predict():
 
     if request.method == 'POST':
         age = float(request.form['age'])
-        sex = float(request.form['sex'])
+        sex = str(request.form['sex'])
         sex_male = ""
         if sex == "Male":
-            sex_male == 1
+            sex_male == int(1)
         else:
-            sex_male == 0
+            sex_male == int(0)
 
         bmi = float(request.form['bmi'])
 
         children = float(request.form['children'])
 
-        smoker = float(request.form['smoker'])
+        smoker = str(request.form['smoker'])
         smoker_yes = ""
         if sex == "Yes":
-            smoker_yes == 1
+            smoker_yes == int(1)
         else:
             smoker_yes == 0
 
-        region = float(request.form['region'])
+        region = str(request.form['region'])
         region_northwest = ""
         region_southeast = ""
         region_southwest = ""
 
 
         if region  == "southwest":
-            region_northwest == 0
-            region_southeast == 0
-            region_southwest == 1
+            region_northwest == int(0)
+            region_southeast == int(0)
+            region_southwest == int(1)
         elif region == "southeast":
-            region_northwest == 0
-            region_southeast == 1
-            region_southwest == 0
+            region_northwest == int(0)
+            region_southeast == int(1)
+            region_southwest == int(0)
         elif region == "northwest":
-            region_northwest == 1
-            region_southeast == 0
-            region_southwest == 0
+            region_northwest == int(1)
+            region_southeast == int(0)
+            region_southwest == int(0)
         else:
-            region_northwest == 0
-            region_southeast == 0
-            region_southwest == 0
+            region_northwest == int(0)
+            region_southeast == int(0)
+            region_southwest == int(0)
 
 
 
