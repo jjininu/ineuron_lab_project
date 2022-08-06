@@ -53,9 +53,7 @@ class InsuranceData:
                 "smoker_yes" : [self.smoker_yes],
                 "region_northwest" : [self.region_northwest],
                 "region_southeast" : [self.region_southeast],
-                "region_southwest" : [self.region_southwest],
-                "charges" : [self.charges]
-            }
+                "region_southwest" : [self.region_southwest]}
             return input_data
         except Exception as e:
             raise CustomException(e, sys)

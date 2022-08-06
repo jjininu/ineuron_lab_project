@@ -109,23 +109,23 @@ def predict():
 
     if request.method == 'POST':
         age = int(request.form['age'])
-        sex = str(request.form['sex'])
-         
+        sex = request.form['sex']
+        sex_male = ""
         if sex == "Male":
-            sex == 1
+            sex_male = 1
         else:
-            sex == 0
+            sex_male = 0
 
         bmi = float(request.form['bmi'])
 
         children = int(request.form['children'])
 
-        s = str(request.form['smoker'])
-        
+        s = request.form['smoker']
+        smoker = ""
         if s == "smoker" :
-            s == int(1)
+            smoker = 1
         else:
-            s == int(0)
+            smoker = 0
 
         region = str(request.form['region'])
         region_northwest = ""
@@ -134,29 +134,29 @@ def predict():
 
 
         if region  == "Southwest":
-            region_northwest == int(0)
-            region_southeast == int(0)
-            region_southwest == int(1)
+            region_northwest = 0
+            region_southeast = 0
+            region_southwest = 1
         elif region == "Southeast":
-            region_northwest == int(0)
-            region_southeast == int(1)
-            region_southwest == int(0)
+            region_northwest = 0
+            region_southeast = 1
+            region_southwest = 0
         elif region == "Sorthwest":
-            region_northwest == int(1)
-            region_southeast == int(0)
-            region_southwest == int(0)
+            region_northwest = 1
+            region_southeast = 0
+            region_southwest = 0
         else:
-            region_northwest == int(0)
-            region_southeast == int(0)
-            region_southwest == int(0)
+            region_northwest = 0
+            region_southeast = 0
+            region_southwest = 0 
             
 
 
         insurance_data = InsuranceData( age = age,
-                                sex_male = sex ,
+                                sex_male = int(sex_male) ,
                                 bmi = bmi,
                                 children = children,
-                                smoker_yes = s,
+                                smoker_yes = smoker,
                                 region_northwest = region_northwest,
                                 region_southeast =  region_southeast,
                                 region_southwest = region_southwest
