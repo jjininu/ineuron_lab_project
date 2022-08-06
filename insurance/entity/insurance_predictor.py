@@ -10,22 +10,27 @@ import pandas as pd
 class InsuranceData:
 
     def __init__(self,
-                 age :        int,
-                 sex :        object,
-                 bmi :        float,
-                 children:    int,
-                 smoker:      int,
-                 region:      object,
-                 charges:     float
-                 ):
+                 age :  int,
+                 sex_male : int,
+                 bmi :   float,
+                 children: int,
+                 smoker_yes:  int,
+                 region_northwest: int,
+                 region_southeast : int,
+                 region_southwest : int,
+                 charges: float = None
+                 ):    
+                
         try:
             
             self.age = age
-            self.sex = sex
+            self.sex_male = sex_male
             self.bmi = bmi
             self.children = children
-            self.smoker = smoker
-            self.region = region
+            self.smoker_yes = smoker_yes
+            self.region_northwest = region_northwest
+            self.region_southeast = region_southeast
+            self.region_southwest = region_southwest
             self.charges = charges
 
         except Exception as e:
@@ -42,11 +47,13 @@ class InsuranceData:
         try:
             input_data = {
                "age" : [self.age],
-                "sex" : [self.sex] ,
+                "sex_male" : [self.sex_male],
                 "bmi" : [self.bmi],
                 "children" : [self.children],
-                "smoker" : [self.smoker],
-                "region" : [self.region],
+                "smoker_yes" : [self.smoker_yes],
+                "region_northwest" : [self.region_northwest],
+                "region_southeast" : [self.region_southeast],
+                "region_southwest" : [self.region_southwest],
                 "charges" : [self.charges]
             }
             return input_data
