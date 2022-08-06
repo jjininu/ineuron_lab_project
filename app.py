@@ -110,22 +110,22 @@ def predict():
     if request.method == 'POST':
         age = int(request.form['age'])
         sex = str(request.form['sex'])
-        sex_male = ""
+         
         if sex == "Male":
-            sex_male == int(1)
+            sex == 1
         else:
-            sex_male == int(0)
+            sex == 0
 
         bmi = float(request.form['bmi'])
 
         children = int(request.form['children'])
 
-        smoker = str(request.form['smoker'])
-        smoker_yes = ""
-        if sex == "Yes":
-            smoker_yes == int(1)
+        s = str(request.form['smoker'])
+        
+        if s == "smoker" :
+            s == int(1)
         else:
-            smoker_yes == int(0)
+            s == int(0)
 
         region = str(request.form['region'])
         region_northwest = ""
@@ -153,10 +153,10 @@ def predict():
 
 
         insurance_data = InsuranceData( age = age,
-                                sex_male = smoker ,
+                                sex_male = sex ,
                                 bmi = bmi,
                                 children = children,
-                                smoker_yes = smoker,
+                                smoker_yes = s,
                                 region_northwest = region_northwest,
                                 region_southeast =  region_southeast,
                                 region_southwest = region_southwest
