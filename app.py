@@ -14,6 +14,7 @@ from insurance.pipeline.pipeline import Pipeline
 from insurance.entity.insurance_predictor import InsuranceData, InsurancePredictor
 from flask import send_file, abort, render_template
 import numpy as np
+import pandas as pd
 
 
 ROOT_DIR = os.getcwd()
@@ -128,29 +129,16 @@ def predict():
         else:
             smoker = 0
 
-        region = str(request.form['region'])
-        region_northwest = ""
-        region_southeast = ""
-        region_southwest = ""
-
-
-        if region  == "Southwest":
-            region_northwest = 0
-            region_southeast = 0
-            region_southwest = 1
-        elif region == "Southeast":
-            region_northwest = 0
-            region_southeast = 1
-            region_southwest = 0
-        elif region == "Northwest":
-            region_northwest = 1
-            region_southeast = 0
-            region_southwest = 0
-        else:
-            region_northwest = 0
-            region_southeast = 0
-            region_southwest = 0 
-            
+        region = request.form['region']
+        def change(region):
+            if region  == str("Southwest"):
+                return ({"region_northwest":0,"region_southeast":0,"region_southwest":1})
+            elif region == "Southeast":
+                return ({"region_northwest":0,"region_southeast":1,"region_southwest":0})
+            elif region == "Northwest":
+                return ({"region_northwest":1,"region_southeast":0,"region_southwest":0})
+            else:
+                return ({"region_northwest":0,"region_southeast":0,"region_southwest":0})
 
 
         insurance_data = InsuranceData( age = age,
@@ -158,27 +146,26 @@ def predict():
                                 bmi = bmi,
                                 children = children,
                                 smoker_yes = smoker,
-                                region_northwest = region_northwest,
-                                region_southeast =  region_southeast,
-                                region_southwest = region_southwest
-                                )
+                                region_northwest = change(region)["region_northwest"],
+                                region_southeast = change(region)["region_southeast"],
+                                region_southwest = change(region)["region_southwest"])
+                                
 
-        data  = np.array([age,sex_male,smoker,region_northwest,region_southeast,region_southwest])
+        #data  = np.array([age,sex_male,smoker,change(region)["region_northwest"],change(region)["region_southeast"],change(region)["region_southwest"]])
             
             
             
                              
-        insurance_arr = data.reshape(1,-1)
+        insurance_df = insurance_data.get_insurance_input_data_frame()
         insurance_predictor = InsurancePredictor(model_dir=MODEL_DIR)
-        insurance_charge = insurance_predictor.predict(X=insurance_arr)
+        insurance_charge = insurance_predictor.predict(X=insurance_df)
         context = {
            INSURANCE_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
            INSURANCE_VALUE_KEY: insurance_charge,
            "message": "Prediction done."}
+        return render_template('predict.html', context=context)
     return render_template('predict.html', context=context)
     
-
-
 @app.route('/saved_models', defaults={'req_path': 'saved_models'})
 @app.route('/saved_models/<path:req_path>')
 def saved_models_dir(req_path):
