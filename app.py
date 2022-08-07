@@ -13,6 +13,7 @@ from insurance.constant import CONFIG_DIR, get_current_time_stamp
 from insurance.pipeline.pipeline import Pipeline
 from insurance.entity.insurance_predictor import InsuranceData, InsurancePredictor
 from flask import send_file, abort, render_template
+import numpy as np
 
 
 ROOT_DIR = os.getcwd()
@@ -141,7 +142,7 @@ def predict():
             region_northwest = 0
             region_southeast = 1
             region_southwest = 0
-        elif region == "Sorthwest":
+        elif region == "Northwest":
             region_northwest = 1
             region_southeast = 0
             region_southwest = 0
@@ -161,13 +162,15 @@ def predict():
                                 region_southeast =  region_southeast,
                                 region_southwest = region_southwest
                                 )
+
+        data  = np.array([age,sex_male,smoker,region_northwest,region_southeast,region_southwest])
             
             
             
                              
-        insurance_df = insurance_data.get_insurance_input_data_frame()
+        insurance_arr = data.reshape(1,-1)
         insurance_predictor = InsurancePredictor(model_dir=MODEL_DIR)
-        insurance_charge = insurance_predictor.predict(X=insurance_df)
+        insurance_charge = insurance_predictor.predict(X=insurance_arr)
         context = {
            INSURANCE_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
            INSURANCE_VALUE_KEY: insurance_charge,
