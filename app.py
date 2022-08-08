@@ -131,9 +131,9 @@ def predict():
 
         region = request.form['region']
         def change(region):
-            if region  == str("Southwest"):
+            if region  == str(Southwest):
                 return ({"region_northwest":0,"region_southeast":0,"region_southwest":1})
-            elif region == "Southeast":
+            elif region == str("Southeast"):
                 return ({"region_northwest":0,"region_southeast":1,"region_southwest":0})
             elif region == "Northwest":
                 return ({"region_northwest":1,"region_southeast":0,"region_southwest":0})
