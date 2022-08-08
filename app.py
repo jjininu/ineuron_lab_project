@@ -124,7 +124,7 @@ def predict():
 
         s = request.form['smoker']
         smoker = ""
-        if s == "smoker" :
+        if s == "Smoker" :
             smoker = 1
         else:
             smoker = 0
