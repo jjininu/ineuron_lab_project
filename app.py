@@ -130,15 +130,20 @@ def predict():
             smoker = 0
 
         region = request.form['region']
-        def change(region):
-            if region  == str(Southwest):
-                return ({"region_northwest":0,"region_southeast":0,"region_southwest":1})
-            elif region == str("Southeast"):
-                return ({"region_northwest":0,"region_southeast":1,"region_southwest":0})
-            elif region == "Northwest":
-                return ({"region_northwest":1,"region_southeast":0,"region_southwest":0})
-            else:
-                return ({"region_northwest":0,"region_southeast":0,"region_southwest":0})
+        d = {region_northwest : "northwest", region_southwest : "southwest", region_southeast : "southeast"}
+
+
+        if region == "northwest" :
+            d[region_northwest] = 1
+            d[region_southwest] = 0
+            d[region_southeast] = 0
+        
+        else:
+            region_northwest = 0
+            region_southeast = 0
+            region_southwest = 0
+        
+ 
 
 
         insurance_data = InsuranceData( age = age,
@@ -146,9 +151,9 @@ def predict():
                                 bmi = bmi,
                                 children = children,
                                 smoker_yes = smoker,
-                                region_northwest = change(region)["region_northwest"],
-                                region_southeast = change(region)["region_southeast"],
-                                region_southwest = change(region)["region_southwest"])
+                                region_northwest = region_northwest,
+                                region_southeast = region_southeast,
+                                region_southwest =  region_southwest)
                                 
 
         #data  = np.array([age,sex_male,smoker,change(region)["region_northwest"],change(region)["region_southeast"],change(region)["region_southwest"]])
