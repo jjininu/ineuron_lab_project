@@ -13,6 +13,7 @@ from insurance.constant import CONFIG_DIR, get_current_time_stamp
 from insurance.pipeline.pipeline import Pipeline
 from insurance.entity.insurance_predictor import InsuranceData, InsurancePredictor
 from flask import send_file, abort, render_template
+from insurance.util.util import change
 import numpy as np
 import pandas as pd
 
@@ -129,38 +130,19 @@ def predict():
         else:
             smoker = 0
 
-        region = request.form['region']
-        d = {region_northwest : "northwest", region_southwest : "southwest", region_southeast : "southeast"}
-
-
-        if region == "northwest" :
-            d[region_northwest] = 1
-            d[region_southwest] = 0
-            d[region_southeast] = 0
+        region = str(request.form['region'])
+        region_input  = change(region).values()
         
-        else:
-            region_northwest = 0
-            region_southeast = 0
-            region_southwest = 0
         
- 
-
-
         insurance_data = InsuranceData( age = age,
                                 sex_male = int(sex_male) ,
-                                bmi = bmi,
-                                children = children,
-                                smoker_yes = smoker,
-                                region_northwest = region_northwest,
-                                region_southeast = region_southeast,
-                                region_southwest =  region_southwest)
-                                
-
-        #data  = np.array([age,sex_male,smoker,change(region)["region_northwest"],change(region)["region_southeast"],change(region)["region_southwest"]])
-            
-            
-            
-                             
+                                bmi = int(bmi),
+                                children = int(children),
+                                smoker_yes = int(smoker),
+                                region_northwest =  region_input[0],
+                                region_southeast = region_input[1],
+                                region_southwest =  region_input[2])
+                     
         insurance_df = insurance_data.get_insurance_input_data_frame()
         insurance_predictor = InsurancePredictor(model_dir=MODEL_DIR)
         insurance_charge = insurance_predictor.predict(X=insurance_df)

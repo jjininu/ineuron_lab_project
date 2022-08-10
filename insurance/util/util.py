@@ -113,4 +113,26 @@ def load_data(file_path: str, schema_file_path: str) -> pd.DataFrame:
 def read_write_file(x,y):
   with open(x,"r") as x , open(y,"w") as y:
     y.write(x.read())
+
+def change(region):
+  if region  == "Southwest":
+    return ({"region_northwest":0,"region_southeast":0,"region_southwest":1})
+  elif region == "Southeast":
+   
+    region_northwest = 0
+    region_southeast = 1
+    region_southwest = 0
+    return ({"region_northwest":0,"region_southeast":1,"region_southwest":0})
+  elif region == "Northwest":
+  
+    region_northwest = 1
+    region_southeast = 0
+    region_southwest = 0
+    return ({"region_northwest":1,"region_southeast":0,"region_southwest":0})
+  else:
+    
+    region_northwest = 0
+    region_southeast = 0
+    region_southwest = 0 
+    return ({"region_northwest":0,"region_southeast":0,"region_southwest":0})
     
