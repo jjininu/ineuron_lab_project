@@ -131,7 +131,7 @@ def predict():
             smoker = 0
 
         region = str(request.form['region'])
-        region_input  = change(region).values()
+        region_input  = change(region)
         
         
         insurance_data = InsuranceData( age = age,
@@ -139,9 +139,9 @@ def predict():
                                 bmi = int(bmi),
                                 children = int(children),
                                 smoker_yes = int(smoker),
-                                region_northwest =  region_input[0],
-                                region_southeast = region_input[1],
-                                region_southwest =  region_input[2])
+                                region_northwest =  region_input["region_northwest"],
+                                region_southeast = region_input["region_southeast"],
+                                region_southwest =  region_input["region_southwest"])
                      
         insurance_df = insurance_data.get_insurance_input_data_frame()
         insurance_predictor = InsurancePredictor(model_dir=MODEL_DIR)
