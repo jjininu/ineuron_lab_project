@@ -150,7 +150,7 @@ def predict():
            INSURANCE_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
            INSURANCE_VALUE_KEY: insurance_charge,
            "message": "Prediction done."}
-        return render_template('predict.html', context=context)
+        # return render_template('predict.html', context=context)
     return render_template('predict.html', context=context)
     
 @app.route('/saved_models', defaults={'req_path': 'saved_models'})
