@@ -139,9 +139,9 @@ def predict():
                                 bmi = int(bmi),
                                 children = int(children),
                                 smoker_yes = int(smoker),
-                                region_northwest =  region_input["region_northwest"],
-                                region_southeast = region_input["region_southeast"],
-                                region_southwest =  region_input["region_southwest"])
+                                region_northwest =  int(region_input["region_northwest"]),
+                                region_southeast = int(region_input["region_southeast"]),
+                                region_southwest =  int(region_input["region_southwest"]))
                      
         insurance_df = insurance_data.get_insurance_input_data_frame()
         insurance_predictor = InsurancePredictor(model_dir=MODEL_DIR)
