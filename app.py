@@ -136,7 +136,7 @@ def predict():
         
         insurance_data = InsuranceData( age = age,
                                 sex_male = int(sex_male) ,
-                                bmi = int(bmi),
+                                bmi = float(bmi),
                                 children = int(children),
                                 smoker_yes = int(smoker),
                                 region_northwest =  int(region_input["region_northwest"]),
@@ -145,10 +145,10 @@ def predict():
                      
         insurance_df = insurance_data.get_insurance_input_data_frame()
         insurance_predictor = InsurancePredictor(model_dir=MODEL_DIR)
-        insurance_charge = insurance_predictor.predict(X=insurance_df)
+        charges = insurance_predictor.predict(X=insurance_df)
         context = {
            INSURANCE_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
-           INSURANCE_VALUE_KEY: insurance_charge,
+           INSURANCE_VALUE_KEY: charges,
            "message": "Prediction done."}
         # return render_template('predict.html', context=context)
     return render_template('predict.html', context=context)

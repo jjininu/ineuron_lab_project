@@ -81,7 +81,7 @@ class InsurancePredictor:
         try:
             model_path = self.get_latest_model_path()
             model = load_object(file_path=model_path)
-            insurance_charge = model.predict(X)
-            return insurance_charge
+            charges = model.predict(X)
+            return charges
         except Exception as e:
             raise CustomException(e, sys) from e
