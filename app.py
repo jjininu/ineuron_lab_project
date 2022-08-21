@@ -31,7 +31,7 @@ MODEL_DIR = os.path.join(ROOT_DIR, SAVED_MODELS_DIR_NAME)
 from insurance.logger import get_log_dataframe
 
 INSURANCE_DATA_KEY = "insurance_data"
-INSURANCE_VALUE_KEY = "insurance_value"
+INSURANCE_VALUE_KEY = "charges"
 
 app = Flask(__name__)
 
@@ -150,7 +150,7 @@ def predict():
            INSURANCE_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
            INSURANCE_VALUE_KEY: charges,
            "message": "Prediction done."}
-        # return render_template('predict.html', context=context)
+        return render_template('predict.html', context=context)
     return render_template('predict.html', context=context)
     
 @app.route('/saved_models', defaults={'req_path': 'saved_models'})
