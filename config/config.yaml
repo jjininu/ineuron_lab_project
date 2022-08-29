@@ -3,7 +3,8 @@ training_pipeline_config:
   artifact_dir: artifact
 
 data_ingestion_config:
-  local_file : https://raw.githubusercontent.com/memudualimatou/INSURANCE-CHARGES-WEB-APPLICATION/main/insurance.csv
+  local_file : https://raw.githubusercontent.com/Shehryar-mallick/Insurance-Charges-Prediction/main/insurance.csv
+
   ingested_dir: ingested_data
   ingested_train_dir: train
   ingested_test_dir: test 

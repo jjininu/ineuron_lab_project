@@ -35,9 +35,10 @@ class DataIngestion:
                 os.remove(raw_data_dir)
             os.makedirs(raw_data_dir,exist_ok=True)
             local_file = self.data_ingestion_config.local_file
+            data = pd.read_csv(local_file)
+            shutil.copy(data, raw_data_dir)
+            logging.info(f"Data transfer completed successfully.")
             
-            shutil.copy(local_file, raw_data_dir)
-            return local_file
         except Exception as e:
             raise Exception(e)
     
